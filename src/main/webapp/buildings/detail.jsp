@@ -17,7 +17,7 @@
 <div class="flex justify-between items-center">
     <h2 class="text-xl font-bold">${building.name}</h2>
     <a
-            href="admin-buildings-list.do"
+            href="list.building"
             class="inline-block rounded bg-teal-600 px-4 py-2 font-medium text-white hover:bg-indigo-700"
     >
         Liste des immeubles
@@ -30,7 +30,7 @@
 </div>
 
 <div>
-    <form action="admin-buildings-save.do" method="post" class="space-y-5 ">
+    <form action="" method="post" class="space-y-5 ">
         <input
                 type="text"
                 id="address"

@@ -14,14 +14,14 @@
     <nav class="flex gap-4">
         <ul class="flex gap-2 items-center">
             <li>
-                <a href="index.do">Accueil</a>
+                <a href="index.building">Accueil</a>
             </li>
             <li>
-                <a href="admin-buildings-list.do">Immeubles</a>
-
-
+                <a href="list.building">Immeubles</a>
             </li>
-            <li>Locations</li>
+            <li>
+                <a href="list.rent">Logements</a>
+            </li>
             <li>Locataires</li>
         </ul>
 

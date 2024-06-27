@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "bs", urlPatterns = "*.do")
+@WebServlet(name = "bs", urlPatterns = "*.building")
 public class BuildingServlet extends HttpServlet {
 
     private IBuildingDao metier;
@@ -28,7 +28,7 @@ public class BuildingServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getServletPath();
 
-        if (path.equalsIgnoreCase("/admin-buildings-list.do") || path.equalsIgnoreCase("/index.do")){
+        if (path.equalsIgnoreCase("/list.building") || path.equalsIgnoreCase("/index.building")){
             try {
                 List<Building> buildings = metier.getAllBuildings();
                 BuildingModel model = new BuildingModel();
@@ -36,7 +36,7 @@ public class BuildingServlet extends HttpServlet {
                 req.setAttribute("buildModel", model);
 
 
-                if(path.equalsIgnoreCase("/admin-buildings-list.do")){
+                if(path.equalsIgnoreCase("/list.building")){
                     req.getRequestDispatcher("buildings/list.jsp").forward(req, resp);
                 } else {
                     System.out.println(model);
@@ -48,9 +48,9 @@ public class BuildingServlet extends HttpServlet {
                 throw new RuntimeException(e);
             }
 
-        } else if (path.equalsIgnoreCase("/admin-buildings-add.do")){
+        } else if (path.equalsIgnoreCase("/add.building")){
             req.getRequestDispatcher("buildings/add.jsp").forward(req, resp);
-        } else if (path.equalsIgnoreCase("/admin-buildings-view.do")){
+        } else if (path.equalsIgnoreCase("/view.building")){
             int id = Integer.parseInt(req.getParameter("building_id"));
             Building building = null;
             try {
@@ -61,6 +61,26 @@ public class BuildingServlet extends HttpServlet {
 
             req.setAttribute("building", building);
             req.getRequestDispatcher("buildings/detail.jsp").forward(req, resp);
+        } else if (path.equalsIgnoreCase("/edit.building")){
+            int id = Integer.parseInt(req.getParameter("building_id"));
+            Building building = null;
+            try {
+                building = metier.getBuildingById(id);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            req.setAttribute("building", building);
+            req.getRequestDispatcher("buildings/edit.jsp").forward(req, resp);
+        } else if (path.equalsIgnoreCase("/delete.building")){
+            int id = Integer.parseInt(req.getParameter("building_id"));
+            Building building = null;
+            try {
+                building = metier.getBuildingById(id);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            req.setAttribute("building", building);
+            req.getRequestDispatcher("buildings/delete.jsp").forward(req, resp);
         }
 
     }
@@ -69,7 +89,7 @@ public class BuildingServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getServletPath();
 
-        if (path.equalsIgnoreCase("/admin-buildings-save.do")){
+        if (path.equalsIgnoreCase("/add-process.building")){
 
             String name = req.getParameter("name");
             String address = req.getParameter("address");
@@ -88,6 +108,32 @@ public class BuildingServlet extends HttpServlet {
 
             req.setAttribute("building", building);
             req.getRequestDispatcher("buildings/detail.jsp").forward(req, resp);
+        } else if (path.equalsIgnoreCase("/edit-process.building")){
+            int id = Integer.parseInt(req.getParameter("id"));
+            String name = req.getParameter("name");
+            String address = req.getParameter("address");
+            String description = req.getParameter("description");
+            String equipments = req.getParameter("equipments");
+            String image = req.getParameter("image");
+
+
+            Building building = new Building();
+            building.setId(id);
+            building.setName(name);
+            building.setAddress(address);
+            building.setDescription(description);
+            building.setEquipments(equipments);
+            building.setImage(image);
+
+            int ok = metier.updateBuilding(building);
+            if (ok == 1)
+                resp.sendRedirect("list.building");
+        } else if (path.equalsIgnoreCase("/delete-process.building")){
+            int id = Integer.parseInt(req.getParameter("id"));
+
+            int ok = metier.deleteBuilding(id);
+            if (ok == 1)
+                resp.sendRedirect("list.building");
         }
     }
 }

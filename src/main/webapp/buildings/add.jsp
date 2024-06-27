@@ -17,7 +17,7 @@
     <div class="flex justify-between items-center">
         <h2 class="text-xl font-bold">Ajouter un immeuble</h2>
         <a
-                href="admin-buildings-list.do"
+                href="list.building"
                 class="inline-block rounded bg-teal-600 px-4 py-2 font-medium text-white hover:bg-indigo-700"
         >
             Liste des immeubles
@@ -25,7 +25,7 @@
     </div>
 
     <div>
-        <form action="admin-buildings-save.do" method="post" class="space-y-5 mt-4">
+        <form action="add-process.building" method="post" class="space-y-5 mt-4">
                 <input type="text" id="name" name="name" class="border block w-full rounded-md p-2" placeholder="Nom de l'immeuble"/>
 
                 <input type="text" id="address" name="address" class="border block w-full rounded-md p-2" placeholder="Adresse de l'immeuble"/>

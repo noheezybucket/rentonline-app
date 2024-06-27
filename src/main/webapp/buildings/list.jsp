@@ -19,7 +19,7 @@
     <div class="flex justify-between items-center">
         <h2 class="text-xl font-bold">Immeubles</h2>
         <a
-                href="admin-buildings-add.do"
+                href="add.building"
                 class="inline-block rounded bg-teal-600 px-4 py-2 font-medium text-white hover:bg-indigo-700"
         >
             Ajouter un immeuble
@@ -47,14 +47,14 @@
                 <td class="whitespace-nowrap px-4 py-2 text-gray-700">${ building.address}</td>
                 <td class="whitespace-nowrap px-4 py-2 text-gray-700">${ building.equipments }</td>
                 <td class="whitespace-nowrap px-4 py-2">
-                    <a href="admin-buildings-view.do?building_id=${building.id}" class="inline-block rounded bg-teal-600 px-4 py-2 font-medium text-white hover:bg-teal-700">
+                    <a href="view.building?building_id=${building.id}" class="inline-block rounded bg-teal-600 px-4 py-2 font-medium text-white hover:bg-teal-700">
                         Détails
                     </a>
-                    <a href="#" class="inline-block rounded bg-orange-600 px-4 py-2 font-medium text-white hover:bg-teal-700">
+                    <a href="edit.building?building_id=${building.id}" class="inline-block rounded bg-orange-600 px-4 py-2 font-medium text-white hover:bg-teal-700">
                         Modifier
                     </a>
 
-                    <a href="#" class="inline-block rounded bg-red-600 px-4 py-2 font-medium text-white hover:bg-teal-700">
+                    <a href="delete.building?building_id=${building.id}" class="inline-block rounded bg-red-600 px-4 py-2 font-medium text-white hover:bg-teal-700">
                         Supprimer
                     </a>
                 </td>
